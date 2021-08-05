@@ -2,14 +2,22 @@ import './App.css';
 import { useState } from 'react';
 import Header from './components/Header';
 import TaskList  from './components/TaskList';
+import AddTask  from './components/AddTask';
 
 
-function App() {
+const App = () => {
   const [tasks, setTasks] = useState([
     { id: 1, text: 'Lorem Ipsum', reminder: false },
     { id: 2, text: 'Dolor sit tu amet', reminder: false },
     { id: 3, text: 'Foo bar task', reminder: false },
   ]);
+
+  const addTask = (task) => {
+    const id = Math.floor(Math.random() * 10000) + 1;
+
+    const newTask = { id, ...task };
+    setTasks([ ...tasks, newTask ]);
+  }
 
   const deleteTask = (id) => {
     setTasks(tasks.filter((task) => task.id !== id));
@@ -23,6 +31,7 @@ function App() {
     <div className='App'>
       <header className='App-header'>
         <Header title='Task Tracker | Home' />
+        <AddTask onAdd={addTask} />
         {
           tasks.length > 0 ?
           <TaskList
