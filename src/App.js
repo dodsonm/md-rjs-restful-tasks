@@ -20,9 +20,9 @@ function App() {
   }
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <Header title="Task Tracker | Home" />
+    <div className='App'>
+      <header className='App-header'>
+        <Header title='Task Tracker | Home' />
         {
           tasks.length > 0 ?
           <TaskList
