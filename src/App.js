@@ -6,6 +6,7 @@ import AddTask  from './components/AddTask';
 
 
 const App = () => {
+  const [showAddTask, setShowAddTask] = useState(false);
   const [tasks, setTasks] = useState([
     { id: 1, text: 'Lorem Ipsum', reminder: false },
     { id: 2, text: 'Dolor sit tu amet', reminder: false },
@@ -30,8 +31,8 @@ const App = () => {
   return (
     <div className='App'>
       <header className='App-header'>
-        <Header title='Task Tracker | Home' />
-        <AddTask onAdd={addTask} />
+        <Header title='Task Tracker | Home' showAddTask={showAddTask} onAdd={() => setShowAddTask(!showAddTask)} />
+        {showAddTask && <AddTask onAdd={addTask} />}
         {
           tasks.length > 0 ?
           <TaskList
