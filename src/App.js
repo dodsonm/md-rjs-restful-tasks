@@ -11,11 +11,27 @@ function App() {
     { id: 3, text: 'Foo bar task', reminder: false },
   ]);
 
+  const deleteTask = (id) => {
+    setTasks(tasks.filter((task) => task.id !== id));
+  }
+
+  const toggleReminder = (id) => {
+    setTasks(tasks.map((task) => task.id === id ? { ...task, reminder: !task.reminder } : task));
+  }
+
   return (
     <div className="App">
       <header className="App-header">
         <Header title="Task Tracker | Home" />
-        <TaskList tasks={tasks} />
+        {
+          tasks.length > 0 ?
+          <TaskList
+            tasks={tasks}
+            onDelete={deleteTask}
+            onToggle={toggleReminder}
+          /> :
+          'No tasks to show'
+        }
       </header>
     </div>
   );
